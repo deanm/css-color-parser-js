@@ -1,3 +1,5 @@
+https://github.com/deanm/css-color-parser-js
+
 JavaScript parser for CSS color strings.
 
 > parseCSSColor(' rgba (255, 128, 12, 0.5)');
