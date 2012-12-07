@@ -8,6 +8,10 @@ JavaScript parser for CSS color strings.
  [ 255, 0, 17, 1 ]
 > parseCSSColor('slateblue');
  [ 106, 90, 205, 1 ]
+> parseCSSColor('blah');
+ null
+> parseCSSColor('ffffff');
+ null
 
 
 (c) Dean McNamee <dean@gmail.com>, 2012.
