@@ -98,7 +98,7 @@ var kCSSColorTable = {
   "yellow": [255,255,0,1], "yellowgreen": [154,205,50,1]}
 
 function clamp_css_byte(i) {  // Clamp to integer 0 .. 255.
-  i = i >> 0;
+  i = Math.round(i);  // Seems to be what Chrome does (vs truncation).
   return i < 0 ? 0 : i > 255 ? 255 : i;
 }
 
@@ -116,6 +116,16 @@ function parse_css_float(str) {  // float or percentage.
   if (str[str.length - 1] === '%')
     return clamp_css_float(parseFloat(str) / 100);
   return clamp_css_float(parseFloat(str));
+}
+
+function css_hue_to_rgb(m1, m2, h) {
+  if (h < 0) h += 1;
+  else if (h > 1) h -= 1;
+
+  if (h * 6 < 1) return m1 + (m2 - m1) * h * 6;
+  if (h * 2 < 1) return m2;
+  if (h * 3 < 2) return m1 + (m2 - m1) * (2/3 - h) * 6;
+  return m1;
 }
 
 function parseCSSColor(css_str) {
@@ -150,20 +160,35 @@ function parseCSSColor(css_str) {
   if (op !== -1 && ep + 1 === str.length) {
     var fname = str.substr(0, op);
     var params = str.substr(op+1, ep-(op+1)).split(',');
+    var alpha = 1;  // To allow case fallthrough.
     switch (fname) {
+      case 'rgba':
+        if (params.length !== 4) return null;
+        alpha = parse_css_float(params.pop());
+        // Fall through.
       case 'rgb':
         if (params.length !== 3) return null;
         return [parse_css_int(params[0]),
                 parse_css_int(params[1]),
                 parse_css_int(params[2]),
-                1];
-      case 'rgba':
+                alpha];
+      case 'hsla':
         if (params.length !== 4) return null;
-        return [parse_css_int(params[0]),
-                parse_css_int(params[1]),
-                parse_css_int(params[2]),
-                parse_css_float(params[3])];
-      // TODO(deanm): HSL / HSV.
+        alpha = parse_css_float(params.pop());
+        // Fall through.
+      case 'hsl':
+        if (params.length !== 3) return null;
+        var h = (((parseFloat(params[0]) % 360) + 360) % 360) / 360;  // 0 .. 1
+        // NOTE(deanm): According to the CSS spec s/l should only be
+        // percentages, but we don't bother and let float or percentage.
+        var s = parse_css_float(params[1]);
+        var l = parse_css_float(params[2]);
+        var m2 = l <= 0.5 ? l * (s + 1) : l + s - l * s;
+        var m1 = l * 2 - m2;
+        return [clamp_css_byte(css_hue_to_rgb(m1, m2, h+1/3) * 255),
+                clamp_css_byte(css_hue_to_rgb(m1, m2, h) * 255),
+                clamp_css_byte(css_hue_to_rgb(m1, m2, h-1/3) * 255),
+                alpha];
       default:
         return null;
     }

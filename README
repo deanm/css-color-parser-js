@@ -14,6 +14,14 @@ JavaScript parser for CSS color strings.
  null
 > parseCSSColor('ffffff');
  null
+> parseCSSColor('hsla(900, 15%, 90%, 0.5)')
+ [ 226, 233, 233, 0.5 ]
+> parseCSSColor('hsla(900, 15%, 90%)')
+ null
+> parseCSSColor('hsl(900, 15%, 90%)')
+ [ 226, 233, 233, 1 ]
+> parseCSSColor('hsl(900, 0.15, 90%)')  // NOTE: not spec compliant.
+ [ 226, 233, 233, 1 ]
 
 
 (c) Dean McNamee <dean@gmail.com>, 2012.
