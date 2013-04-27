@@ -138,13 +138,10 @@ function parseCSSColor(css_str) {
   // #abc and #abc123 syntax.
   if (str[0] === '#') {
     if (str.length === 4) {
-      var iv = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
-      if (!(iv >= 0 && iv <= 0xfff)) return null;  // Covers NaN.
-      return [((iv & 0xf00) >> 4) | ((iv & 0xf00) >> 8),
-              (iv & 0xf) | ((iv & 0xf) << 4),
-              (iv & 0xf0) | ((iv & 0xf0) >> 4),
-              1];
-    } else if (str.length === 7) {
+      str = '#' + str[1] + str[1] + str[2] + str[2] + str[3] + str[3];
+    }
+
+    if (str.length === 7) {
       var iv = parseInt(str.substr(1), 16);  // TODO(deanm): Stricter parsing.
       if (!(iv >= 0 && iv < 0xffffff)) return null;  // Covers NaN.
       return [(iv & 0xff0000) >> 16,
