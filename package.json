@@ -1,6 +1,6 @@
 {
   "name": "csscolorparser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Dean McNamee <dean@gmail.com>",
   "keywords": ["css", "color", "html5", "parser"],
   "repository": {
