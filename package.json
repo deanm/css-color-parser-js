@@ -7,5 +7,6 @@
     "type": "git",
     "url": "https://github.com/deanm/css-color-parser-js"
   },
+  "license": "MIT",
   "main": "csscolorparser.js"
 }
