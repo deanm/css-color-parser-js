@@ -82,6 +82,7 @@ var kCSSColorTable = {
   "peachpuff": [255,218,185,1], "peru": [205,133,63,1],
   "pink": [255,192,203,1], "plum": [221,160,221,1],
   "powderblue": [176,224,230,1], "purple": [128,0,128,1],
+  "rebeccapurple": [102,51,153,1],
   "red": [255,0,0,1], "rosybrown": [188,143,143,1],
   "royalblue": [65,105,225,1], "saddlebrown": [139,69,19,1],
   "salmon": [250,128,114,1], "sandybrown": [244,164,96,1],
