@@ -159,14 +159,14 @@ function parseCSSColor(css_str) {
       return [((iv & 0xf000) >> 8) | ((iv & 0xf000) >> 12),
               ((iv & 0x0f00) >> 4) | ((iv & 0x0f00) >> 8),
                (iv & 0x00f0)       | ((iv & 0x00f0) >> 4),
-              ((iv & 0x000f) << 4  |  (iv & 0x000f)) / 256];
+              ((iv & 0x000f) << 4  |  (iv & 0x000f)) / 255];
     } else if (str.length === 9) {
       // #rrggbbaa
       if (!(iv >= 0 && iv <= 0xffffffff)) return null;  // Covers NaN.
       return [((iv & 0xff000000) >> 24) & 0xff,
                (iv & 0x00ff0000) >> 16,
                (iv & 0x0000ff00) >> 8,
-               (iv & 0x000000ff) / 256];
+               (iv & 0x000000ff) / 255];
     }
 
     return null;
