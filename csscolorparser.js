@@ -163,10 +163,10 @@ function parseCSSColor(css_str) {
     } else if (str.length === 9) {
       // #rrggbbaa
       if (!(iv >= 0 && iv <= 0xffffffff)) return null;  // Covers NaN.
-      return [(iv & 0xff000000) >> 24,
-              (iv & 0x00ff0000) >> 16,
-              (iv & 0x0000ff00) >> 8,
-              (iv & 0x000000ff) / 256];
+      return [((iv & 0xff000000) >> 24) & 0xff,
+               (iv & 0x00ff0000) >> 16,
+               (iv & 0x0000ff00) >> 8,
+               (iv & 0x000000ff) / 256];
     }
 
     return null;
