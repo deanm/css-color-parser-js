@@ -198,4 +198,8 @@ function parseCSSColor(css_str) {
   return null;
 }
 
-try { exports.parseCSSColor = parseCSSColor } catch(e) { }
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports = { parseCSSColor: parseCSSColor };
+} else {
+  window.csscolorparser = { parseCSSColor: parseCSSColor };
+}
