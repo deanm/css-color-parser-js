@@ -165,7 +165,7 @@ function parseCSSColor(css_str) {
     switch (fname) {
       case 'rgba':
         if (params.length !== 4) return null;
-        alpha = parse_css_float(params.pop());
+        alpha = parse_css_float(params[params.length - 1]);
         // Fall through.
       case 'rgb':
         if (params.length !== 3) return null;
@@ -175,7 +175,7 @@ function parseCSSColor(css_str) {
                 alpha];
       case 'hsla':
         if (params.length !== 4) return null;
-        alpha = parse_css_float(params.pop());
+        alpha = parse_css_float(params[params.length - 1]);
         // Fall through.
       case 'hsl':
         if (params.length !== 3) return null;
