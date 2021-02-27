@@ -2,27 +2,18 @@ https://github.com/deanm/css-color-parser-js
 
 JavaScript parser for CSS color strings.
 
-> parseCSSColor(' rgba (255, 128, 12, 0.5)');
- [ 255, 128, 12, 0.5 ]
-> parseCSSColor('#fff');
- [ 255, 255, 255, 1 ]
-> parseCSSColor('#ff0011');
- [ 255, 0, 17, 1 ]
-> parseCSSColor('slateblue');
- [ 106, 90, 205, 1 ]
-> parseCSSColor('blah');
- null
-> parseCSSColor('ffffff');
- null
-> parseCSSColor('hsla(900, 15%, 90%, 0.5)')
- [ 226, 233, 233, 0.5 ]
-> parseCSSColor('hsla(900, 15%, 90%)')
- null
-> parseCSSColor('hsl(900, 15%, 90%)')
- [ 226, 233, 233, 1 ]
-> parseCSSColor('hsl(900, 0.15, 90%)')  // NOTE: not spec compliant.
- [ 226, 233, 233, 1 ]
-
+| Invoke                                     | Output                                         |
+| ------------------------------------------ | ---------------------------------------------- |
+| parseCSSColor(' rgba (255, 128, 12, 0.5)') | [ 255, 128, 12, 0.5 ]                          |
+| parseCSSColor('#fff')                      | [ 255, 255, 255, 1 ]                           |
+| parseCSSColor('#ff0011')                   | [ 255, 0, 17, 1 ]                              |
+| parseCSSColor('slateblue')                 | [ 106, 90, 205, 1 ]                            |
+| parseCSSColor('blah')                      | null                                           |
+| parseCSSColor('ffffff')                    | null                                           |
+| parseCSSColor('hsla(900, 15%, 90%, 0.5)')  | [ 226, 233, 233, 0.5 ]                         |
+| parseCSSColor('hsla(900, 15%, 90%)')       | null                                           |
+| parseCSSColor('hsl(900, 15%, 90%)')        | [ 226, 233, 233, 1 ]                           |
+| parseCSSColor('hsl(900, 0.15, 90%)')       | [ 226, 233, 233, 1 ] NOTE: not spec compliant. |
 
 (c) Dean McNamee <dean@gmail.com>, 2012.
 
